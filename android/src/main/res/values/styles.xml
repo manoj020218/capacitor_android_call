@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Full-bleed, no action bar — this Activity is a lock-screen call UI,
+         not a normal app screen. -->
+    <style name="NativeCall.IncomingCallTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/nativecall_background</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+</resources>

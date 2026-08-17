@@ -1,0 +1,12 @@
+node_modules/
+dist/
+android/build/
+android/.gradle/
+android/local.properties
+android/.cxx/
+*.iml
+.idea/
+.DS_Store
+example/node_modules/
+example/android/app/build/
+example/android/.gradle/

@@ -1,0 +1,6 @@
+{
+  "appId": "com.nativecall.example",
+  "appName": "NativeCall Example",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

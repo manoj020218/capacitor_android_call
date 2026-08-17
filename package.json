@@ -1,0 +1,72 @@
+{
+  "name": "capacitor-native-call",
+  "version": "0.1.0",
+  "description": "VoIP-style incoming-call UI for Capacitor Android apps: a foreground ringtone service, a full-screen lock-screen-wake intent, and a clean JS/TS bridge — no host-app Kotlin required.",
+  "main": "dist/plugin.cjs.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "unpkg": "dist/plugin.js",
+  "files": [
+    "android/src/main/",
+    "android/build.gradle",
+    "dist/",
+    "ios/Plugin/",
+    "CapacitorNativeCall.podspec",
+    "Package.swift"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manoj020218/capacitor_android_call.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manoj020218/capacitor_android_call/issues"
+  },
+  "keywords": [
+    "capacitor",
+    "capacitor-plugin",
+    "android",
+    "voip",
+    "incoming-call",
+    "push-notifications",
+    "fcm",
+    "ringtone",
+    "full-screen-intent",
+    "lock-screen"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc && rollup -c rollup.config.mjs",
+    "clean": "rimraf ./dist",
+    "watch": "tsc --watch",
+    "lint": "eslint src --ext .ts",
+    "verify": "npm run verify:android && npm run build",
+    "verify:android": "cd android && gradlew.bat clean build",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/docgen": "^0.3.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.9.6",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "@capacitor/core": ">=6.0.0"
+  },
+  "capacitor": {
+    "android": {
+      "src": "android"
+    },
+    "ios": {
+      "src": "ios"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nativecall_default_title">Incoming call</string>
+    <string name="nativecall_accept">Accept</string>
+    <string name="nativecall_decline">Decline</string>
+</resources>

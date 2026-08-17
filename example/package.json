@@ -1,0 +1,19 @@
+{
+  "name": "capacitor-native-call-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal manual-test harness for capacitor-native-call — not published.",
+  "scripts": {
+    "vendor": "node scripts/vendor.js",
+    "sync": "npm run vendor && cap sync android",
+    "open": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "capacitor-native-call": "file:.."
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.0"
+  }
+}

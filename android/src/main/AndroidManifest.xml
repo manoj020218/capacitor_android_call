@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Play the ringtone and vibrate until answered/declined/timed out. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Wake a locked screen for the incoming-call UI. -->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+
+    <!-- Android 13+ runtime notification permission; the host app is
+         responsible for requesting it (this plugin does not prompt on its
+         own — see README "Notification permission"). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application>
+
+        <!-- Foreground service that owns the looping ringtone + vibration
+             for the lifetime of a single incoming call. -->
+        <service
+            android:name="com.nativecall.plugin.IncomingCallService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!-- Full-screen, lock-screen-wake Activity the notification's
+             full-screen intent launches. Not exported: only this plugin's
+             own PendingIntents may start it. -->
+        <activity
+            android:name="com.nativecall.plugin.IncomingCallActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:taskAffinity="com.nativecall.plugin.incomingcall"
+            android:excludeFromRecents="true"
+            android:showOnLockScreen="true"
+            android:theme="@style/NativeCall.IncomingCallTheme" />
+
+        <!-- Handles Accept/Decline tapped from the notification tray
+             directly, without opening IncomingCallActivity. -->
+        <receiver
+            android:name="com.nativecall.plugin.CallActionReceiver"
+            android:exported="false" />
+
+        <!-- Data-only FCM messages of type "incoming_call" reach this even
+             with the host app fully killed. If the host app already runs
+             its own FirebaseMessagingService (e.g. via
+             @capacitor/push-notifications), remove this service from the
+             merged manifest with tools:node="remove" and instead call
+             NativeCallMessageHandler.handleData(...) from that service —
+             see README "Integrating with an existing FCM listener". -->
+        <service
+            android:name="com.nativecall.plugin.CallMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+    </application>
+</manifest>
