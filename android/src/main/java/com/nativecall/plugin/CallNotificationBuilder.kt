@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 
 internal object CallNotificationBuilder {
 
@@ -58,6 +59,12 @@ internal object CallNotificationBuilder {
             .setContentTitle(title)
             .setContentText(body)
             .setSmallIcon(context.applicationInfo.icon)
+            // Tints the small icon and (on some OEM skins) the action row —
+            // action button backgrounds themselves are OS-rendered and can't be
+            // custom-colored by any app; IncomingCallActivity is the fully
+            // themeable surface for that.
+            .setColor(ContextCompat.getColor(context, R.color.nativecall_accent))
+            .setColorized(true)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setCategory(NotificationCompat.CATEGORY_CALL)
             .setOngoing(true)

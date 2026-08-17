@@ -12,10 +12,22 @@
     android:paddingEnd="32dp">
 
     <TextView
+        android:id="@+id/nativecall_eyebrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nativecall_eyebrow"
+        android:textAllCaps="true"
+        android:textColor="@color/nativecall_accent"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.15"
+        android:gravity="center" />
+
+    <TextView
         android:id="@+id/nativecall_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:textColor="@color/nativecall_text_primary"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -40,27 +52,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/nativecall_decline_button"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/nativecall_decline"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/nativecall_button_decline_bg"
+            android:stateListAnimator="@null"
+            android:elevation="0dp"
             android:text="@string/nativecall_decline"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            android:textStyle="bold"
             android:textColor="@color/nativecall_text_primary" />
 
         <Button
             android:id="@+id/nativecall_accept_button"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="@color/nativecall_accept"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/nativecall_button_accept_bg"
+            android:stateListAnimator="@null"
+            android:elevation="0dp"
             android:text="@string/nativecall_accept"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            android:textStyle="bold"
             android:textColor="@color/nativecall_text_primary" />
 
     </LinearLayout>
