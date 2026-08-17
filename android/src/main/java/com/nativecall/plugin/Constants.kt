@@ -1,6 +1,6 @@
 package com.nativecall.plugin
 
-internal object Constants {
+object Constants {
     const val EXTRA_CALL_ID = "com.nativecall.plugin.extra.CALL_ID"
     const val EXTRA_TITLE = "com.nativecall.plugin.extra.TITLE"
     const val EXTRA_BODY = "com.nativecall.plugin.extra.BODY"
