@@ -48,6 +48,13 @@ class IncomingCallActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.nativecall_body).text = body
         findViewById<Button>(R.id.nativecall_accept_button).setOnClickListener { onAccept() }
         findViewById<Button>(R.id.nativecall_decline_button).setOnClickListener { onDecline() }
+
+        // Notification's own Accept action routes here (with this flag set) instead of
+        // through a BroadcastReceiver, since Android 12+ blocks a receiver calling
+        // startActivity() directly. Accept immediately — no second tap needed.
+        if (intent.getBooleanExtra(Constants.EXTRA_AUTO_ANSWER, false)) {
+            onAccept()
+        }
     }
 
     private fun setShowWhenLockedAndTurnScreenOn() {

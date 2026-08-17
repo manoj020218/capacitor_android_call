@@ -33,7 +33,25 @@ internal object CallNotificationBuilder {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
 
-        val answerPendingIntent = actionPendingIntent(context, Constants.ACTION_ANSWER, callId)
+        // The Accept action must launch an Activity directly (PendingIntent.getActivity),
+        // not go through a BroadcastReceiver that then calls startActivity() itself —
+        // Android 12+ blocks that as a "notification trampoline" background activity
+        // launch, even from a notification action tap. Reuses IncomingCallActivity with
+        // an auto-answer flag so it accepts immediately instead of waiting for a second
+        // tap on its own Accept button.
+        val answerIntent = Intent(context, IncomingCallActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra(Constants.EXTRA_CALL_ID, callId)
+            putExtra(Constants.EXTRA_TITLE, title)
+            putExtra(Constants.EXTRA_BODY, body)
+            putExtra(Constants.EXTRA_AUTO_ANSWER, true)
+        }
+        val answerPendingIntent = PendingIntent.getActivity(
+            context,
+            (Constants.ACTION_ANSWER + callId).hashCode(),
+            answerIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
         val declinePendingIntent = actionPendingIntent(context, Constants.ACTION_DECLINE, callId)
 
         return NotificationCompat.Builder(context, channelId)

@@ -5,6 +5,7 @@ object Constants {
     const val EXTRA_TITLE = "com.nativecall.plugin.extra.TITLE"
     const val EXTRA_BODY = "com.nativecall.plugin.extra.BODY"
     const val EXTRA_RINGTONE_KEY = "com.nativecall.plugin.extra.RINGTONE_KEY"
+    const val EXTRA_AUTO_ANSWER = "com.nativecall.plugin.extra.AUTO_ANSWER"
 
     const val ACTION_START_RINGING = "com.nativecall.plugin.action.START_RINGING"
     const val ACTION_STOP_RINGING = "com.nativecall.plugin.action.STOP_RINGING"
