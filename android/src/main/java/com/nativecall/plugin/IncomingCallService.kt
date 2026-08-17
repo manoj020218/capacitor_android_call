@@ -162,10 +162,38 @@ class IncomingCallService : Service() {
         vibrator = null
         if (emit != null && callId != null) {
             NativeCallEvents.emit(applicationContext, emit, callId)
+            if (emit == NativeCallEvents.Type.DECLINED) {
+                notifyDeclineWebhook(callId)
+            }
         }
         currentCallId = null
         stopForegroundCompat()
         stopSelf()
+    }
+
+    /** Declining never opens the app (by design), so there's no JS bridge to tell
+     * the host's backend the call was declined — it would otherwise just sit
+     * ringing until the server's own timeout. If the host app configured a
+     * declineWebhookUrl at initialize(), fire a bare POST to it directly from
+     * native code so the other party finds out immediately either way. */
+    private fun notifyDeclineWebhook(callId: String) {
+        val urlTemplate = NativeCallConfig.load(applicationContext)?.declineWebhookUrl ?: return
+        val url = urlTemplate.replace("{callId}", callId)
+        Thread {
+            try {
+                (java.net.URL(url).openConnection() as java.net.HttpURLConnection).apply {
+                    requestMethod = "POST"
+                    connectTimeout = 10_000
+                    readTimeout = 10_000
+                    doOutput = false
+                    connect()
+                    inputStream.close()
+                    disconnect()
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Decline webhook POST to $url failed", e)
+            }
+        }.start()
     }
 
     private fun startForegroundCompat(notification: Notification) {

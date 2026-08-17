@@ -57,12 +57,14 @@ class NativeCallPlugin : Plugin() {
 
         val ringDurationSeconds = call.getInt("ringDurationSeconds") ?: NativeCallConfig.DEFAULT_RING_DURATION_SECONDS
         val incomingCallRoute = call.getString("incomingCallRoute")
+        val declineWebhookUrl = call.getString("declineWebhookUrl")
 
         val config = NativeCallConfig(
             ringtones = ringtones,
             defaultRingtoneKey = defaultRingtone,
             ringDurationSeconds = ringDurationSeconds,
             incomingCallRoute = incomingCallRoute,
+            declineWebhookUrl = declineWebhookUrl,
         )
         NativeCallConfig.save(context, config)
         RingtoneChannelManager.registerChannels(context, ringtones)

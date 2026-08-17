@@ -37,6 +37,21 @@ export interface InitializeOptions {
    * Omit to always use the minimal native fallback screen.
    */
   incomingCallRoute?: string;
+  /**
+   * Declining a call never opens the host app (by design — there's no reason
+   * to interrupt the user just to say no), so there's normally no way to tell
+   * your backend "declined" without the JS bridge, which may not exist at all
+   * if the app was fully killed. If set, native code fires a bare, fire-and-
+   * forget `POST` directly to this URL the moment Decline is tapped — from
+   * any entry point (notification, lock screen) or a ring timeout. `{callId}`
+   * is replaced with the FCM payload's `callId` before the request is sent;
+   * the request has no body and no auth header, so the URL itself must carry
+   * whatever your server needs to authorize the action (e.g. a per-call
+   * capability token as a path segment). Omit to skip this entirely — the
+   * host app's own `callDeclined` JS listener still fires normally whenever
+   * the bridge is next up.
+   */
+  declineWebhookUrl?: string;
 }
 
 export interface StopRingingOptions {

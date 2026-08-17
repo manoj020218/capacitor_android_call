@@ -18,6 +18,7 @@ data class NativeCallConfig(
     val defaultRingtoneKey: String,
     val ringDurationSeconds: Int,
     val incomingCallRoute: String?,
+    val declineWebhookUrl: String?,
 ) {
     /** Resolves an incoming FCM payload's `ringtone` key, falling back to the
      * configured default if the key is missing or unrecognized. */
@@ -30,6 +31,7 @@ data class NativeCallConfig(
         private const val KEY_DEFAULT_RINGTONE = "default_ringtone"
         private const val KEY_RING_DURATION = "ring_duration_seconds"
         private const val KEY_ROUTE = "incoming_call_route"
+        private const val KEY_DECLINE_WEBHOOK_URL = "decline_webhook_url"
         const val DEFAULT_RING_DURATION_SECONDS = 45
 
         private fun prefs(context: Context): SharedPreferences =
@@ -46,6 +48,7 @@ data class NativeCallConfig(
                 .putString(KEY_DEFAULT_RINGTONE, config.defaultRingtoneKey)
                 .putInt(KEY_RING_DURATION, config.ringDurationSeconds)
                 .putString(KEY_ROUTE, config.incomingCallRoute)
+                .putString(KEY_DECLINE_WEBHOOK_URL, config.declineWebhookUrl)
                 .apply()
         }
 
@@ -64,6 +67,7 @@ data class NativeCallConfig(
                 defaultRingtoneKey = defaultKey,
                 ringDurationSeconds = p.getInt(KEY_RING_DURATION, DEFAULT_RING_DURATION_SECONDS),
                 incomingCallRoute = p.getString(KEY_ROUTE, null),
+                declineWebhookUrl = p.getString(KEY_DECLINE_WEBHOOK_URL, null),
             )
         }
 
