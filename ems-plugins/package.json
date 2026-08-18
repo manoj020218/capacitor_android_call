@@ -1,0 +1,30 @@
+{
+  "name": "jenix-capacitor-plugins",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Reusable Capacitor plugins for the Jenix FieldForce native layer.",
+  "workspaces": [
+    "cap-core",
+    "cap-device-health",
+    "cap-location",
+    "cap-lifecycle",
+    "cap-push",
+    "cap-dialer",
+    "cap-device-policy"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "check:lines": "node ./scripts/check-lines.mjs",
+    "check": "npm run test && npm run check:lines"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/docgen": "^0.3.0",
+    "@types/node": "^24.3.1",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.9.2",
+    "vitest": "3.2.6"
+  }
+}

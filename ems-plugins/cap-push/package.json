@@ -1,0 +1,31 @@
+{
+  "name": "@jenix/cap-push",
+  "version": "0.1.0",
+  "description": "Push command routing plugin for EMS.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "android/",
+    "dist/"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.json",
+    "test": "vitest run src/commands.test.ts"
+  },
+  "peerDependencies": {
+    "@capacitor/core": ">=7.0.0"
+  },
+  "dependencies": {
+    "@jenix/cap-core": "file:../cap-core"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0"
+  },
+  "capacitor": {
+    "android": {
+      "src": "android"
+    }
+  }
+}

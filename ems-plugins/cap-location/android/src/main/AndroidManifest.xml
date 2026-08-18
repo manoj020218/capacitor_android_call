@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <application>
+        <service
+            android:name="com.jenix.cap.location.LocationForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+        <receiver
+            android:name="com.jenix.cap.location.LocationRecoverReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.jenix.cap.lifecycle.RECOVER_LOCATION" />
+                <action android:name="com.jenix.cap.location.SYNC_NOW" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
